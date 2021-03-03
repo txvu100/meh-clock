@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:meh_clock/provider/reference.dart';
 import 'package:meh_clock/screen/clock_screen.dart';
 import 'package:meh_clock/screen/setting_screen.dart';
@@ -12,7 +9,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -30,10 +26,7 @@ class MyApp extends StatelessWidget {
           textTheme: TextTheme(
             headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             headline6: TextStyle(
-                fontSize: 16.0,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.bold,
-                color: Colors.black),
+                fontSize: 16.0, fontStyle: FontStyle.normal, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
         home: Text("mehClock"),

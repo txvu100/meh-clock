@@ -65,7 +65,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ToggleSwitch(
-                      initialLabelIndex: 0,
+                      initialLabelIndex: ref.ampmStyle ? 1 : 0,
                       labels: ['24-hour', 'AM-PM'],
                       minWidth: 100.0,
                       fontSize: 18.0,
@@ -74,7 +74,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       inactiveBgColor: Colors.black12,
                       inactiveFgColor: Colors.black,
                       onToggle: (index) {
-                        print('switched to: $index');
+                        if (index == 0) ref.ampmStyle = false;
                       },
                     ),
                   ),
@@ -93,8 +93,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             labelText: 'Date format string',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.5),
+                              borderSide: BorderSide(color: Colors.grey, width: 1.5),
                             ),
                           ),
                           validator: controller.validateDateFormat,
