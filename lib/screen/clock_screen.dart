@@ -31,6 +31,7 @@ class ClockWidget extends StatefulWidget {
 
 class _ClockWidgetState extends State<ClockWidget> {
   String _timeString;
+
   // String _date;
   String _ampm;
   Timer _timer;
@@ -62,8 +63,8 @@ class _ClockWidgetState extends State<ClockWidget> {
 
   String _formatDateTime(DateTime dateTime) {
     return _flashDot
-        ? DateFormat('h:mm').format(dateTime)
-        : DateFormat('h mm').format(dateTime);
+        ? DateFormat('H:mm').format(dateTime)
+        : DateFormat('H mm').format(dateTime);
   }
 
   String _formatAMPM(DateTime dateTime) {
@@ -128,7 +129,13 @@ class _ClockWidgetState extends State<ClockWidget> {
               crossAxisAlignment: CrossAxisAlignment.baseline,
               children: [
                 Text(
-                  _timeString,
+                  ref.ampmStyle
+                      ? _flashDot
+                          ? DateFormat('h:mm').format(DateTime.now())
+                          : DateFormat('h mm').format(DateTime.now())
+                      : _flashDot
+                          ? DateFormat('H:mm').format(DateTime.now())
+                          : DateFormat('H mm').format(DateTime.now()),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: timeSize,
@@ -136,21 +143,23 @@ class _ClockWidgetState extends State<ClockWidget> {
                     fontFamily: 'JetBrainsMono',
                   ),
                 ),
-                ref.showAMPMIndicator
-                    ? Container(
-                        // color: Colors.white,
-                        margin: EdgeInsets.all(8.0),
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          _ampm,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: timeSize / 3,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'JetBrainsMono',
-                          ),
-                        ),
-                      )
+                ref.ampmStyle
+                    ? ref.showAMPMIndicator
+                        ? Container(
+                            // color: Colors.white,
+                            margin: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              _ampm,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: timeSize / 3,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'JetBrainsMono',
+                              ),
+                            ),
+                          )
+                        : SizedBox(height: 1.0)
                     : SizedBox(height: 1.0),
               ],
             ),
