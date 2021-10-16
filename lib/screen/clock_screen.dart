@@ -86,7 +86,7 @@ class _ClockWidgetState extends State<ClockWidget> {
     _datePattern = Provider.of<Reference>(context, listen: false).datePattern;
     Function startTimer = ModalRoute.of(context).settings.arguments;
     double screenWidth = MediaQuery.of(context).size.width;
-    double timeSize = screenWidth / 3.5;
+    double timeSize = screenWidth / 4;
     double textSize = screenWidth / 30;
     double dateSize = screenWidth / 20;
 
@@ -126,7 +126,7 @@ class _ClockWidgetState extends State<ClockWidget> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
+              // crossAxisAlignment: CrossAxisAlignment.baseline,
               children: [
                 Text(
                   ref.ampmStyle
