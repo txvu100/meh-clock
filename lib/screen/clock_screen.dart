@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:meh_clock/provider/reference.dart';
 import 'package:meh_clock/screen/setting_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
 
 class ClockScreen extends StatefulWidget {
   static const routeName = "/clock_screen";
@@ -41,7 +42,9 @@ class _ClockWidgetState extends State<ClockWidget> {
   @override
   void initState() {
     super.initState();
-    _datePattern = Provider.of<Reference>(context, listen: false).datePattern;
+    Wakelock.enable();
+
+    _datePattern = Reference.datePattern;
     _timeString = _formatDateTime(DateTime.now());
     _ampm = _formatAMPM(DateTime.now());
     // _date = _formatDate(DateTime.now());
@@ -62,9 +65,7 @@ class _ClockWidgetState extends State<ClockWidget> {
   }
 
   String _formatDateTime(DateTime dateTime) {
-    return _flashDot
-        ? DateFormat('H:mm').format(dateTime)
-        : DateFormat('H mm').format(dateTime);
+    return _flashDot ? DateFormat('H:mm').format(dateTime) : DateFormat('H mm').format(dateTime);
   }
 
   String _formatAMPM(DateTime dateTime) {
@@ -83,14 +84,14 @@ class _ClockWidgetState extends State<ClockWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _datePattern = Provider.of<Reference>(context, listen: false).datePattern;
+    _datePattern = Reference.datePattern;
     Function startTimer = ModalRoute.of(context).settings.arguments;
     double screenWidth = MediaQuery.of(context).size.width;
-    double timeSize = screenWidth / 4;
+    double timeSize = screenWidth / 5;
     double textSize = screenWidth / 30;
     double dateSize = screenWidth / 20;
 
-    return Consumer<Reference>(builder: (context, ref, child) {
+
       return Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(20.0),
@@ -102,7 +103,7 @@ class _ClockWidgetState extends State<ClockWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  DateFormat(ref.datePattern).format(DateTime.now()),
+                  DateFormat(Reference.datePattern).format(DateTime.now()),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: dateSize,
@@ -116,8 +117,7 @@ class _ClockWidgetState extends State<ClockWidget> {
                     color: Colors.white,
                     size: 45.0,
                   ),
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(SettingScreen.routeName),
+                  onPressed: () => Navigator.of(context).pushNamed(SettingScreen.routeName),
                 ),
               ],
             ),
@@ -129,7 +129,7 @@ class _ClockWidgetState extends State<ClockWidget> {
               // crossAxisAlignment: CrossAxisAlignment.baseline,
               children: [
                 Text(
-                  ref.ampmStyle
+                  Reference.ampmStyle
                       ? _flashDot
                           ? DateFormat('h:mm').format(DateTime.now())
                           : DateFormat('h mm').format(DateTime.now())
@@ -143,8 +143,8 @@ class _ClockWidgetState extends State<ClockWidget> {
                     fontFamily: 'JetBrainsMono',
                   ),
                 ),
-                ref.ampmStyle
-                    ? ref.showAMPMIndicator
+                Reference.ampmStyle
+                    ? Reference.showAMPMIndicator
                         ? Container(
                             // color: Colors.white,
                             margin: EdgeInsets.all(8.0),
@@ -166,33 +166,30 @@ class _ClockWidgetState extends State<ClockWidget> {
             Spacer(
               flex: 3,
             ),
-            ref.showSecondBar
-                ? Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 60,
-                      itemBuilder: (context, index) => Container(
-                        padding: EdgeInsets.all(2.0),
-                        margin: EdgeInsets.all(2.0),
-                        width: screenWidth / 60 - screenWidth / 240,
-                        height: screenWidth / 60 - screenWidth / 240,
-                        color: int.parse(
-                                    DateFormat('ss').format(DateTime.now())) >=
-                                index
-                            ? Colors.white
-                            : Colors.white10,
-                        // decoration: BoxDecoration(
-                        //    border: Border.all(color: Colors.white, width: 1.0,),
-                        // ),
-                      ),
-                    ),
-                  )
-                : SizedBox(height: 1.0),
+            // ref.showSecondBar
+            //     ? Flexible(
+            //         flex: 1,
+            //         fit: FlexFit.tight,
+            //         child: ListView.builder(
+            //           scrollDirection: Axis.horizontal,
+            //           itemCount: 60,
+            //           itemBuilder: (context, index) => Container(
+            //             padding: EdgeInsets.all(2.0),
+            //             margin: EdgeInsets.all(2.0),
+            //             width: screenWidth / 60 - screenWidth / 240,
+            //             height: screenWidth / 60 - screenWidth / 240,
+            //             color:
+            //                 int.parse(DateFormat('ss').format(DateTime.now())) >= index ? Colors.white : Colors.white10,
+            //             // decoration: BoxDecoration(
+            //             //    border: Border.all(color: Colors.white, width: 1.0,),
+            //             // ),
+            //           ),
+            //         ),
+            //       )
+            //     : SizedBox(height: 1.0),
           ],
         ),
       );
-    });
+
   }
 }

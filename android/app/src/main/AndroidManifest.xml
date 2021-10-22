@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.u3amlab.meh_clock">
+    package="com.example.meh_clock">
    <application
-        android:label="meh_clock"
+        android:label="mehClock"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

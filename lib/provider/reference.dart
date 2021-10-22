@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Reference extends ChangeNotifier{
-  String datePattern = "EEEE MMMM dd, yyyy";
-  bool ampmStyle = true;
-  bool showAMPMIndicator = true;
-  bool showSecondBar = true;
+class Reference {
+  static String datePattern = "EEEE MMMM dd, yyyy";
+  static bool ampmStyle = true;
+  static bool showAMPMIndicator = true;
+  static bool showSecondBar = true;
 }

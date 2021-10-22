@@ -65,7 +65,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: ToggleSwitch(
-                      initialLabelIndex: ref.ampmStyle ? 1 : 0,
+                      initialLabelIndex: Reference.ampmStyle ? 1 : 0,
                       labels: ['24-hour', 'AM-PM'],
                       minWidth: 100.0,
                       fontSize: 18.0,
@@ -74,7 +74,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       inactiveBgColor: Colors.black12,
                       inactiveFgColor: Colors.black,
                       onToggle: (index) {
-                        if (index == 0) ref.ampmStyle = false;
+                        if (index == 0) Reference.ampmStyle = false;
                       },
                     ),
                   ),
@@ -87,7 +87,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Expanded(
                         flex: 1,
                         child: TextFormField(
-                          initialValue: ref.datePattern,
+                          initialValue: Reference.datePattern,
                           style: TextStyle(fontWeight: FontWeight.bold),
                           decoration: InputDecoration(
                             labelText: 'Date format string',
@@ -98,9 +98,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           validator: controller.validateDateFormat,
                           onSaved: (value) {
-                            ref.datePattern = value;
-                            print(ref.datePattern);
-                            ref.notifyListeners();
+                            Reference.datePattern = value;
+                            print(Reference.datePattern);
                           },
                         ),
                       ),
@@ -122,10 +121,10 @@ class _SettingScreenState extends State<SettingScreen> {
                               "Show second bar",
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: ref.showSecondBar,
+                            value: Reference.showSecondBar,
                             onChanged: (newValue) {
                               setState(() {
-                                ref.showSecondBar = newValue;
+                                Reference.showSecondBar = newValue;
                               });
                             },
                             controlAffinity: ListTileControlAffinity.leading,
@@ -150,10 +149,10 @@ class _SettingScreenState extends State<SettingScreen> {
                               "Show AM-PM indicator",
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            value: ref.showAMPMIndicator,
+                            value: Reference.showAMPMIndicator,
                             onChanged: (newValue) {
                               setState(() {
-                                ref.showAMPMIndicator = newValue;
+                                Reference.showAMPMIndicator = newValue;
                               });
                             },
                             controlAffinity: ListTileControlAffinity.leading,
