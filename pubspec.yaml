@@ -77,13 +77,9 @@ flutter:
   # example:
 
   fonts:
-    - family: JetBrainsMono
+    - family: DS-DIGIB
       fonts:
-        - asset: fonts/JetBrainsMono-Regular.ttf
-        - asset: fonts/JetBrainsMono-Bold.ttf
-          weight: 700
-        - asset: fonts/JetBrainsMono-ExtraBold.ttf
-          weight: 900
+        - asset: fonts/ds-digib.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
