@@ -32,7 +32,7 @@ class _ClockScreenState extends State<ClockScreen> {
   void _getTime() {
     final DateTime now = DateTime.now();
     setState(() {
-      time = flashDot ? DateFormat('H:mm').format(now) : DateFormat('H mm').format(now);
+      time = flashDot ? DateFormat('h:mm').format(now) : DateFormat('h mm').format(now);
       flashDot = !flashDot;
     });
   }
@@ -57,17 +57,24 @@ class _ClockScreenState extends State<ClockScreen> {
     print('didChangeDependencies()');
     super.didUpdateWidget(oldWidget);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () => Navigator.pushNamed(context, SettingScreen.routeName),
         child: Container(
+          color: Colors.black,
           child: Stack(
             children: [
+              Container(
+                height: MediaQuery.of(context).size.width / 7,
+                // color: Colors.white70,
+                child: Image.asset('images/logo.jpg'),
+              ),
               Center(
                 child: Container(
-                  color: Colors.black87,
+                  // color: Colors.black,
                   padding: EdgeInsets.all(30.0),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
