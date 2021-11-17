@@ -29,6 +29,7 @@ dependencies:
   toggle_switch: "^0.1.8"
   shared_preferences: ^0.5.12+4
   wakelock: ^0.1.4+2
+  sunrise_sunset: ^1.0.4
 
 
   # The following adds the Cupertino Icons font to your application.

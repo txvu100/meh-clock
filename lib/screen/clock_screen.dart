@@ -7,6 +7,7 @@ import 'package:meh_clock/screen/setting_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sunrise_sunset/sunrise_sunset.dart';
 
 class ClockScreen extends StatefulWidget {
   static const routeName = "/clock_screen";
@@ -19,6 +20,8 @@ class _ClockScreenState extends State<ClockScreen> {
   Timer timer;
   String time = '';
   bool flashDot = false;
+  bool isDayTime = true;
+  var response;
 
   @override
   void initState() {
@@ -29,8 +32,19 @@ class _ClockScreenState extends State<ClockScreen> {
     timer = new Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
   }
 
-  void _getTime() {
+  Future<void> _getTime() async {
     final DateTime now = DateTime.now();
+
+    // if (now.second%10 == 0) {
+    //   response = await SunriseSunset.getResults(date: DateTime.now(), latitude: 35.373924, longitude: -97.5642104);
+    //   print(response.data.sunrise);
+    //
+    // }
+
+    // if (now.difference(response.data.sunrise).inMinutes == 0) {
+      // now.compareTo(other)
+    // }
+
     setState(() {
       time = flashDot ? DateFormat('h:mm').format(now) : DateFormat('h mm').format(now);
       flashDot = !flashDot;
